@@ -1,7 +1,10 @@
 import discord
 import os
+from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from collections import Counter
+
+load_dotenv()
 
 print('Application started')
 
@@ -11,14 +14,14 @@ GUILD = os.getenv('DISCORD_GUILD')
 
 CHANNELS_TO_SEARCH = os.getenv('CHANNELS_TO_SEARCH', [])
 CHANNEL_TO_POST_IN = os.getenv('CHANNEL_TO_POST_IN')
-COUNT_ALL_REACTIONS = os.getenv('COUNT_ALL_REACTIONS', True).lower() in ('true', '1', 't')
+COUNT_ALL_REACTIONS = os.getenv('COUNT_ALL_REACTIONS', 'True').lower() in ('true', '1', 't')
 MESSAGE_ABOVE_THRESHOLD = os.getenv('MESSAGE_ABOVE_THRESHOLD','Congratulations _user_mention_')
 MESSAGE_BELOW_THRESHOLD = os.getenv('MESSAGE_BELOW_THRESHOLD', '')
 MESSAGE_HEADER = os.getenv('MESSAGE_HEADER','Which users received the most reactions today?')
-MESSAGE_LIMIT = int(os.getenv('MESSAGE_LIMIT', 5000))
+MESSAGE_LIMIT = int(os.getenv('MESSAGE_LIMIT', '5000'))
 REACTION_LIST = os.getenv('REACTION_LIST')
-SEARCH_ALL_CHANNELS = os.getenv('SEARCH_ALL_CHANNELS', True).lower() in ('true', '1', 't')
-REACTION_THRESHOLD = int(os.getenv('REACTION_THRESHOLD', 0))
+SEARCH_ALL_CHANNELS = os.getenv('SEARCH_ALL_CHANNELS', 'True').lower() in ('true', '1', 't')
+REACTION_THRESHOLD = int(os.getenv('REACTION_THRESHOLD', '0'))
 
 client = discord.Client()
 
