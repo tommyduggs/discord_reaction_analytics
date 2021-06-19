@@ -107,7 +107,9 @@ async def on_ready():
 
   if len(top_users) > 0:
     if top_users[0][1] > REACTION_THRESHOLD and MESSAGE_ABOVE_THRESHOLD:
-      message_end_text = MESSAGE_ABOVE_THRESHOLD.replace('_user_mention_', user_mention_str)
+      top_user_reference = await client.fetch_user(top_users[0][0])
+      top_user_mention_str = top_user_reference.mention
+      message_end_text = MESSAGE_ABOVE_THRESHOLD.replace('_user_mention_', top_user_mention_str)
     elif top_users[0][1] < REACTION_THRESHOLD and MESSAGE_BELOW_THRESHOLD:
       message_end_text = MESSAGE_BELOW_THRESHOLD
 
@@ -120,6 +122,5 @@ async def on_ready():
 
   else:
     print('No users found with reactions in specified channels')
-  
 
 client.run(TOKEN)
