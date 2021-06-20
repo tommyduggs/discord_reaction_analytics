@@ -19,9 +19,10 @@ MESSAGE_ABOVE_THRESHOLD = os.getenv('MESSAGE_ABOVE_THRESHOLD','Congratulations _
 MESSAGE_BELOW_THRESHOLD = os.getenv('MESSAGE_BELOW_THRESHOLD', '')
 MESSAGE_HEADER = os.getenv('MESSAGE_HEADER','Which users received the most reactions today?')
 MESSAGE_LIMIT = int(os.getenv('MESSAGE_LIMIT', '5000'))
+NUMBER_OF_TOP_USERS = int(os.getenv('NUMBER_OF_TOP_USERS', '3'))
 REACTION_LIST = os.getenv('REACTION_LIST')
-SEARCH_ALL_CHANNELS = os.getenv('SEARCH_ALL_CHANNELS', 'True').lower() in ('true', '1', 't')
 REACTION_THRESHOLD = int(os.getenv('REACTION_THRESHOLD', '0'))
+SEARCH_ALL_CHANNELS = os.getenv('SEARCH_ALL_CHANNELS', 'True').lower() in ('true', '1', 't')
 
 client = discord.Client()
 
@@ -62,7 +63,11 @@ async def on_ready():
     for message in messages:
       for reaction in message.reactions:
         current_reaction = str(reaction.emoji)
-        if current_reaction in REACTION_LIST or COUNT_ALL_REACTIONS:
+        current_reaction_codepoint = 'xxxxx' # Setting it to a non-empty string that won't match an item in our list
+        if len(current_reaction) == 1:
+            # Reaction is an emoji, convert to to codepoint 
+            current_reaction_codepoint = 'U+{:X}'.format(ord(current_reaction))
+        if current_reaction in REACTION_LIST or current_reaction_codepoint in REACTION_LIST or COUNT_ALL_REACTIONS:
           current_user_id = str(message.author.id)
           if current_user_id in reaction_count:
             # User ID is already in our dictionary 
@@ -81,7 +86,7 @@ async def on_ready():
             reaction_count[current_user_id] = reaction.count
   
   # Get the top n users with the most combined reactions
-  top_users = Counter(reaction_count).most_common(3)
+  top_users = Counter(reaction_count).most_common(NUMBER_OF_TOP_USERS)
 
   full_message = '**' + MESSAGE_HEADER + '**\n\n'
 
@@ -117,6 +122,9 @@ async def on_ready():
 
     channel_to_post = discord.utils.get(guild.channels, name=CHANNEL_TO_POST_IN)
     await channel_to_post.send(full_message)
+    
+    # For debugging purposes
+    # print(full_message)
 
     print('Message sent')
 
