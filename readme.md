@@ -5,11 +5,11 @@
 
 Discord reaction analytics is a configurable Python script that can be connected to a Discord bot. Message reactions are often a big part of a Discord community, with specific custom reactions often taking on their own meaning.
 
-![Image of a message with reactions](readme_assets/screenshot1.png)
+<img src="readme_assets/screenshot1.png" width="600px" height="174px"></img>
 
 This script allows you to provide the members of a Discord server with fun metrics based on the reactions that are awarded to users. The script is flexible, allowing you to customize aspects such as which reactions should be counted, which channels to search in, and what the bot message should look like.
 
-![Image of the script in action](readme_assets/screenshot2.png)
+<img src="readme_assets/screenshot2.png" width="600px" height="186px" />
 
 ## Installation
 
