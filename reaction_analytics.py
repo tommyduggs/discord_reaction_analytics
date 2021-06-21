@@ -23,10 +23,11 @@ NUMBER_OF_TOP_USERS = int(os.getenv('NUMBER_OF_TOP_USERS', '3'))
 REACTION_LIST = os.getenv('REACTION_LIST')
 REACTION_THRESHOLD = int(os.getenv('REACTION_THRESHOLD', '0'))
 SEARCH_ALL_CHANNELS = os.getenv('SEARCH_ALL_CHANNELS', 'True').lower() in ('true', '1', 't')
+TIME_PERIOD = int(os.getenv('TIME_PERIOD','1'))
 
 client = discord.Client()
 
-yesterday_date_time = datetime.now() - timedelta(days = 1)
+yesterday_date_time = datetime.now() - timedelta(days = TIME_PERIOD)
 
 @client.event
 async def on_ready():
