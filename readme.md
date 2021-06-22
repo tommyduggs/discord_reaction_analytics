@@ -1,7 +1,7 @@
 # Discord Reaction Analytics
 
 [![License](https://img.shields.io/github/license/tommyduggs/discord_reaction_anlytics)](https://github.com/tommyduggs/discord_reaction_anlytics)
-## About
+## Overview
 
 Discord reaction analytics is a configurable Python script that can be connected to a Discord bot. Message reactions are often a big part of a Discord community, with specific custom reactions often taking on their own meaning.
 
@@ -23,7 +23,7 @@ pip install discord.py
 ```
 pip install python-dotenv
 ```
-5. You're all set! You can run the script directly or you can set it up to run on a schedule using a cron job (Unix) or Windows Task Scheduler.
+5. You're all set! You can run the reaction_analytics.py script directly or you can set it up to run on a schedule using a cron job (Unix) or Windows Task Scheduler.
 
 ## Configuration
 
